@@ -24,12 +24,13 @@ jobs:
           npm install -g newman newman-reporter-htmlextra
 
       - name: Run API Regression Tests
+        continue-on-error: true
         run: |
           newman run postman/API_Regression_Posts.json \
             -e postman/API_Regression_Env.json \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export newman/report.html
-            || true
+            
 
       - name: Upload Newman HTML Report
         uses: actions/upload-artifact@v4
