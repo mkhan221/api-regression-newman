@@ -1,4 +1,5 @@
 # API Regression Testing Project
+[![API Regression Tests (Newman)](https://github.com/mkhan221/api-regression-newman/actions/workflows/api-regression.yml/badge.svg)](https://github.com/mkhan221/api-regression-newman/actions/workflows/api-regression.yml)
 
 ## Overview
 This project demonstrates automated API regression testing using Postman, Newman, and GitHub Actions CI.
