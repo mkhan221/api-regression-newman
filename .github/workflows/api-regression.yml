@@ -1,0 +1,37 @@
+name: API Regression Tests (Newman)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  api-regression:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Newman and Reporter
+        run: |
+          npm install -g newman newman-reporter-htmlextra
+
+      - name: Run API Regression Tests
+        run: |
+          newman run postman/API_Regression_Posts.json \
+            -e postman/API_Regression_Env.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export newman/report.html
+
+      - name: Upload Newman HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: API-Regression-Report
+          path: newman/report.html
